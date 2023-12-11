@@ -1,0 +1,5 @@
+apiVersion: v2
+name: fluentd-helm-chart
+description: A Helm chart for deploying Fluentd in Kubernetes
+version: 0.1.0
+

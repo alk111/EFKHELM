@@ -1,0 +1,4 @@
+apiVersion: v2
+name: my-elasticsearch-chart
+description: A Helm chart for Elasticsearch in Kubernetes
+version: 0.1.0

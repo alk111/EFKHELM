@@ -1,0 +1,25 @@
+namespace: kube-logging
+
+master:
+  replicaCount: 2
+  volumeClaim:
+    accessModes: [ "ReadWriteOnce" ]
+    storageSize: 1Gi
+
+data:
+  replicaCount: 3
+  volumeClaim:
+    accessModes: [ "ReadWriteOnce" ]
+    storageSize: 1Gi
+
+elasticsearch:
+  image: docker.elastic.co/elasticsearch/elasticsearch:7.2.0
+  resources:
+    limits:
+      cpu: 1000m
+    requests:
+      cpu: 100m
+  clusterName: k8s-logs
+  seedHosts: "my-elasticsearch-release-es-master-0.elasticsearch-master,my-elasticsearch-release-es-master-1.elasticsearch-master,my-elasticsearch-release-es-master-2.elasticsearch-master"
+  initialMasterNodes: "my-elasticsearch-release-es-master-0,my-elasticsearch-release-es-master-1,my-elasticsearch-release-es-master-2"
+  javaOpts: "-Xms512m -Xmx512m"

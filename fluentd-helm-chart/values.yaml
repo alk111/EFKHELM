@@ -1,0 +1,22 @@
+namespace: kube-logging
+
+releaseName: my-fluentd-release
+
+image:
+  repository: fluent/fluentd-kubernetes-daemonset
+  tag: v1.4.2-debian-elasticsearch-1.1
+
+fluentd:
+  elasticsearchHost: "elasticsearch.kube-logging.svc.cluster.local"
+  elasticsearchPort: "9200"
+  elasticsearchScheme: "http"
+  systemdConf: disable
+  containerTailExcludePath: /var/log/containers/fluent*
+  containerTailParserType: /^(?<time>.+) (?<stream>stdout|stderr)( (?<logtag>.))? (?<log>.*)/
+
+resources:
+  limits:
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 200Mi
